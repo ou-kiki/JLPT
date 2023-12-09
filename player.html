@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title>音乐播放器</title>
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <div id="app">
+        <header class="play_head">
+            <h3>{{ model.blName }}</h3>
+            <i></i>
+            <h2   >{{currItem.bqc_no}} {{currItem.bqc_name}}</h2>
+
+            <aside class="track">
+                <img class="track_map" src="/assets/img/book_default.png" alt="" />
+            </aside>
+        </header>
+
+
+        <main class="play_box">
+            <audio id="audio1" style="display: none;">
+            </audio>
+            <!--控制条-->
+            <nav class="play_nav play_top">
+                <div data-target="caption">
+                    <img src="/assets/img/inco_07.png" alt="" />
+
+                </div>
+                <div data-target="catalog">
+                    <img src="/assets/img/inco_08.png" alt="" />
+                </div>
+                <div data-target="timing">
+                    <img src="/assets/img/inco_09.png" alt="" />
+                </div>
+                <div data-target="speed" style="position: relative;">
+                    <img :src="'/assets/img/bs'+rate+'.png'" alt="" />
+
+                </div>
+            </nav>
+            <!--播放条-->
+            <aside class="play_schedule">
+                <time id="audioCurTime">00:00</time>
+
+                <div class="progress-bar-bg" id="progressBarBg">
+                    <span id="progressDot"></span>
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <time>{{duration}}</time>
+            </aside>
+            <!--控制按钮-->
+            <aside class="play_nav play_op">
+
+                <img src="/assets/img/inco_04.png" alt="" id="but_mode_single" />
+
+                <img src="/assets/img/inco_02.png" alt="" @click="setCurrItem(currIndex-1)" />
+
+                <img :src="'/assets/img/'+icon.play" alt="" class="but_play" @click="playOrPause()" />
+
+                <img src="/assets/img/inco_03.png" alt="" @click="setCurrItem(currIndex+1)" />
+
+                <img src="/assets/img/inco_05b.png" alt="" id="but_mode_order" />
+
+            </aside>
+        </main>
+        <!--以下是弹窗-->
+        <!--弹1-->
+        <article class="tan" id="tan_caption">
+            <div>
+                1.如对音、视频有任何疑问请联系邮箱：service@ecustpress.cn。
+                <br /> <br />
+                2.如通过微信扫描无法实现播放，请点击微信界面右上角，选择使用浏览器打开或使用其它扫码软件。
+                <br /> <br />
+                3.部分图书音频可登陆本社官网免费下载本书音频（详见图书封底提示）。
+                <br /> <br />
+                4.因手机系统原因，部分手机在屏幕自动锁定时（由亮屏进入黑屏状态），音频会随之暂停播放，建议在播放音频时取消自动锁屏功能。
+                <br /> <br />
+                5.版权所有，翻版必究！
+            </div>
+        </article>
+        <!--弹2 目录-->
+        <article class="tan" id="tan_catalog">
+            <div>
+			<ul class="group_control" v-if="list.length>1">
+                <li @click='prevGroup'>上一章</li>
+                <li v-if="currGroupItem">{{ currGroupItem.bookQrCodeGroup.bqcg_name }}[ {{parseInt(currGroupIndex)+1}}/{{list.length}}]</li>
+                <li @click='nextGroup'>下一章</li>
+            </ul>
+                <ul v-if="currGroupItem">
+                    <li v-for="item,index in currGroupItem.listBookQrCode" :class="index===currIndex?'selected':''"
+                        v-on:click="setCurrItem(index)">{{index+1}} {{item.bqc_no}} {{item.bqc_name}}</li>
+                </ul>
+            </div>
+        </article>
+        <!--弹3 定时-->
+        <article class="tan" id="tan_timing">
+            <div>
+                <ul>
+                    <li v-for="item,index in [
+                [0,'不定时'],
+                [15,'15分钟'],
+                [30,'30分钟'],
+                [45,'45分钟'],
+                [60,'60分钟']
+                ]" @click="setTiming(item[0])" :class="item[0]==timing?'selected':''">
+                        {{item[1]}}
+                    </li>
+                </ul>
+            </div>
+
+        </article>
+
+        <article class="tan" id="tan_speed">
+            <div>
+                <ul>
+                    <li v-for="item,index in [0.8,1,2,3,4]" @click="changeSpeed(item)"
+                        :class="item==rate?'selected':''">
+                        {{item}}倍速
+
+                    </li>
+                </ul>
+            </div>
+        </article>
+
+
+    </div>
+
+
+
+</body>
+
+<script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/vue.min.js"></script>
+<script type="text/javascript" src="/assets/js/audio.js"></script>
+</html>

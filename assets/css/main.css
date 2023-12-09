@@ -1,0 +1,312 @@
+/**
+* @name: main
+* @description：main
+* @author: wangxiui
+* @date: 2023/12/9 09:59
+*/
+
+@charset "utf-8";
+/* CSS Document */
+@media all and (orientation:landscape) {
+  .track{
+    display:none;
+  }
+}
+@media all and (orientation:portrait) {
+  .track {
+    display: block;
+  }
+
+}
+
+
+html, body {
+  height: 100%;
+  font-family: "微软雅黑";
+  overflow: hidden;
+  background: #fff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.play_head {
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: #fff;
+}
+
+.play_head > h3 {
+  width: 60%;
+  text-align: center;
+  font-size: .28rem;
+  margin: .2rem 20%;
+  line-height: 0.42rem;
+  max-height: .84rem;
+  overflow: hidden;
+}
+
+.play_head > h2 {
+  width: 60%;
+  margin: .5rem 20%;
+  text-align: center;
+  font-size: .28rem;
+  font-weight: bold;
+}
+
+.play_head > i {
+  width: 40%;
+  height: 1px;
+  top: 1rem;
+  background: #D2D3D3;
+  margin: 0 auto;
+  display: block;
+}
+
+.track {
+  width: 100%;
+}
+
+.track_map {
+  width: 3rem;
+  height: 3rem;
+  margin-left: 1.7rem;
+  box-sizing: border-box;
+  border: #D2D3D3 0rem solid;
+}
+
+/*播放器块*/
+
+.play_box {
+  height: auto;
+  width: 6.4rem;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateZ(0);
+  right: 0;
+  background: #fff;
+}
+
+/*上/下面的按钮*/
+
+.play_nav {
+  width: 100%;
+  height: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  display: -webkit-flex;
+  -webkit-flex-wrap: nowrap;
+  -webkit-justify-content: space-around;
+}
+
+.play_nav div {
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+}
+
+.play_nav div span {
+  font-size: .2rem;
+  width: 100%;
+  color: #595757;
+}
+
+.play_nav div img {
+  padding: 0;
+  margin: 0;
+  width: .8rem;
+}
+
+.play_top i {
+  position: absolute;
+  top: 0.46rem;
+  width: 100%;
+  color: #595757;
+  font-size: 0.18rem;
+  display: block;
+  text-align: center;
+}
+
+/*播放条*/
+
+.play_schedule {
+  width: 100%;
+  height: 1rem;
+  margin-top: .2rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-flex-wrap: nowrap;
+  -webkit-justify-content: space-between;
+  -webkit-align-items: center;
+}
+
+.play_schedule time {
+  width: 15%;
+  display: block;
+  font-size: .2rem;
+  text-align: center;
+}
+
+.progress-bar-bg {
+  width: 70%;
+  background-color: #e6e6e7;
+  position: relative;
+  height: 2px;
+  cursor: pointer;
+}
+
+.progress-bar {
+  background-color: #595656;
+  width: 0;
+  height: 2px;
+}
+
+.progress-bar-bg span {
+  content: " ";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background-color: #595656;
+  border: 3px solid #bfc0c0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -8px;
+  margin-left: -5px;
+  cursor: pointer;
+}
+
+/*下面的按钮*/
+
+.play_op {
+  margin-bottom: .5rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.play_op img {
+  width: .6rem;
+}
+
+.play_op img:nth-of-type(3) {
+  width: .9rem;
+}
+
+/*弹窗*/
+
+.tan {
+  display: none;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.2);
+;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+}
+
+.tan div {
+  max-height: 50%;
+  overflow: auto;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  font-size: .25rem;
+  color: #595757;
+  line-height: 150%;
+}
+
+/* 播放说明 */
+
+#tan_caption div {
+  width: 90%;
+  padding: .25rem 5%;
+}
+
+/* 目录 */
+
+/* 定时 */
+
+/* 速度 */
+.tan_bs {
+  bottom: -.25rem;
+  right: .2rem;
+  position: absolute;
+  background: #fff;
+  z-index: 999;
+  width: 1rem;
+  height: 6rem;
+  display: none;
+}
+
+.tan_bs li {
+  width: .8rem;
+  height: .8rem;
+  margin: .1rem 0;
+  list-style: none;
+}
+
+.tan_bs li img {
+  width: 100%;
+}
+
+/* ul 列表 */
+
+.tan ul {
+  width: 100%;
+  bottom: 0;
+  list-style: none;
+}
+
+.tan li {
+  font-size: .25rem;
+  color: #595757;
+  line-height: 250%;
+  width: 97%;
+  padding-left: 3%;
+  border-bottom: 1px solid #efefef;
+}
+
+.tan li.selected {
+  color: red;
+}
+
+.tan li:last-child {
+  border: none;
+}
+
+
+.group_control {
+  margin-bottom: 0.2rem;
+  font-size: .25rem;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  list-style: none;
+  border-bottom: solid 1px #efefef;
+}
+
+.group_control li {
+  width: auto;
+  overflow: hidden;
+  margin: 0 0.3rem;
+  border: none;
+  white-space: nowrap;
+}
