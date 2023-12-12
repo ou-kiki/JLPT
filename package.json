@@ -1,0 +1,11 @@
+{
+  "name": "JLPT",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@oukiki:ou-kiki/JLPT.git",
+  "author": "oukiki <suiyi222333@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "http-proxy-middleware": "^2.0.6"
+  }
+}

@@ -4,8 +4,6 @@
  * @author: wangxiui
  * @date: 2023/12/9 10:06
  */
-const erweima = "https://www.ecustpress.cn"
-
 function browserRedirect() {
   var sUserAgent = navigator.userAgent.toLowerCase();
   var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
@@ -81,7 +79,7 @@ var app = new Vue({
   },
   methods: {
     getList: function () {
-      let url = `${erweima}/ashx/qrList.ashx?blid=${this.query.blid}&bqcg_id=${this.query.bqcgid}&bqc_id=${this.query.bqcid}`;
+      let url = `/api/ashx/qrList.ashx?blid=${this.query.blid}&bqcg_id=${this.query.bqcgid}&bqc_id=${this.query.bqcid}`;
       let _this = this
       $.ajax({
         url,
@@ -183,7 +181,7 @@ var app = new Vue({
 
       //计数
       $.ajax({
-        url: `${erweima}/erweima/updateClick.ashx`,
+        url: `/api/erweima/updateClick.ashx`,
         data: { "blId": this.currItem.blId, "bqc_id": this.currItem.bqc_id }
       });
     },
