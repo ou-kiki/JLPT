@@ -76,7 +76,7 @@ var app = new Vue({
     //}
     this.query.blid = getQueryStringByName("blid")
     this.query.bqcgid = getQueryStringByName("bqcg_id")
-    this.query.bqcid = getQueryStringByName("bqc_id")
+    this.query.bqcid = getQueryStringByName("bqc_id") || "20301"
     this.getList();
   },
   methods: {
