@@ -135,10 +135,8 @@ var app = new Vue({
       }
     },
     formatSrc(f) {
-      let src = "https://hldqrcode1.oss-cn-shanghai.aliyuncs.com/wapaudio/"
-      let no = this.model.blNo.replace(/-/g, "")
-      no = no.substr(no.length - 5)
-      f.bqc_content = `${src}${no}/${f.bqc_no}.mp3`
+      let src = "assets/audio/"
+      f.bqc_content = `${src}${f.bqc_no}.mp3`
     },
     prevGroup() {
       if (this.currGroupIndex == 0) {
