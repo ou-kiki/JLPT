@@ -18,3 +18,8 @@ fetch(proxiedUrl)
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));
 ```
+
+## 当前跨域配置
+使用`http-proxy-middleware`配合 `vercel serve`相关设置
+
+本地暂时看不到效果，每次需要在vercel上确认实际修改的效果
