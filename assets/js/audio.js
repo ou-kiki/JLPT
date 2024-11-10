@@ -1,9 +1,3 @@
-/**
- * @name: audio
- * @description：audio
- * @author: wangxiui
- * @date: 2023/12/9 10:06
- */
 function browserRedirect() {
   var sUserAgent = navigator.userAgent.toLowerCase();
   var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
@@ -74,12 +68,12 @@ var app = new Vue({
     //}
     this.query.blid = getQueryStringByName("blid")
     this.query.bqcgid = getQueryStringByName("bqcg_id")
-    this.query.bqcid = getQueryStringByName("bqc_id") || "20301"
+    this.query.bqcid = getQueryStringByName("bqc_id")
     this.getList();
   },
   methods: {
     getList: function () {
-      let url = `/api/ashx/qrList.ashx?blid=${this.query.blid}&bqcg_id=${this.query.bqcgid}&bqc_id=${this.query.bqcid}`;
+      let url = `/ashx/qrList.ashx?blid=${this.query.blid}&bqcg_id=${this.query.bqcgid}&bqc_id=${this.query.bqcid}`;
       let _this = this
       $.ajax({
         url,
@@ -135,8 +129,10 @@ var app = new Vue({
       }
     },
     formatSrc(f) {
-      let src = "assets/audio/"
-      f.bqc_content = `${src}${f.bqc_no}.mp3`
+      let src = "https://hldqrcode1.oss-cn-shanghai.aliyuncs.com/wapaudio/"
+      let no = this.model.blNo.replace(/-/g, "")
+      no = no.substr(no.length - 5)
+      f.bqc_content = `${src}${no}/${f.bqc_no}.mp3`
     },
     prevGroup() {
       if (this.currGroupIndex == 0) {
@@ -179,7 +175,7 @@ var app = new Vue({
 
       //计数
       $.ajax({
-        url: `/api/erweima/updateClick.ashx`,
+        url: "/erweima/updateClick.ashx",
         data: { "blId": this.currItem.blId, "bqc_id": this.currItem.bqc_id }
       });
     },
